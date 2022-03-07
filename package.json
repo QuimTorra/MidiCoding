@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/QuimTorra/MidiCoding/issues"
   },
-  "homepage": "https://github.com/QuimTorra/MidiCoding#readme"
+  "homepage": "https://github.com/QuimTorra/MidiCoding#readme",
+  "type": "module"
 }
