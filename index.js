@@ -7,7 +7,7 @@
   DATA2 = 0 xxx xxxx
 */
 
-import { GenDimChord, GenMajChord, GenMinChord } from './generators.js';
+import * as gen from './simpleGen.js';
 import fs from 'fs'
 const file = "./midifiles/file.mid";
 
@@ -56,7 +56,9 @@ const MTrk_end = "FF2F00"; // this is NOT optional, and must be introduced at th
 //   MTrk_data += data;
 // }
 
-let MTrk_data = GenMajChord(60, 0) + GenMinChord(62, 0) + GenMinChord(64, 0) + GenMajChord(65, 0) + GenMajChord(67, 0) + GenMinChord(69, 0) + GenDimChord(71, 0) + GenMajChord(72, 0);
+// let MTrk_data = GenMajChord(60, 0) + GenMinChord(62, 0) + GenMinChord(64, 0) + GenMajChord(65, 0) + GenMajChord(67, 0) + GenMinChord(69, 0) + GenDimChord(71, 0) + GenMajChord(72, 0);
+
+let MTrk_data = gen.GenMinScale(69, true) + gen.GenMajScale(69-12, false, true);
 
 let MTrk_length = (MTrk_data.length/2).toString(16);
 while ( MTrk_length.length < 8 ) {
@@ -67,4 +69,4 @@ const MTrk_BUFFER = MTrk_ID + MTrk_length.toString(16) + MTrk_data + MTrk_end;
 const MTrk = Buffer.from(MTrk_BUFFER, "hex");
 fs.appendFileSync(file, MTrk);
 
-console.log("File formatting ended!")
+console.log("File creation ended!")
